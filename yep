@@ -1,0 +1,21 @@
+name: Daily Video Download
+on:
+  schedule:
+    - cron: "0 2 * * *"  # Runs daily at 2 AM UTC
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install yt-dlp
+        run: pip install yt-dlp
+      - name: Run download script
+        run: |
+          chmod +x ./ytdl.sh
+          ./ytdl.sh
